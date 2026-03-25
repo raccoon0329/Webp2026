@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>資工選課表 - 正確 ID 版</title>
+    <style>
+        /* 基本表格樣式 */
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        tr:nth-child(even){background-color: #f2f2f2;}
+        tr:hover {background-color: #ddd;}
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* 課程連結樣式：藍色、底線、手指游標 */
+        .course-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* 右側半頁視窗 (佔據 50% 寬度) */
+        #coursePopover {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-left: 3px solid #04AA6D;
+        }
+
+        .popover-header {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            color: white;
+            background-color: #ff4d4d;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>資工選課表</h2>
+
+    <table id="csie">
+        <thead>
+            <tr>
+                <th>開課單位</th>
+                <th>課程名稱</th>
+                <th>授課教師</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>資工系</td>
+                <td class="course-link" onclick="openPopover('A2337')">物件導向軟體設計</td>
+                <td>黃崇源</td>
+            </tr>
+            <tr>
+                <td>資工系</td>
+                <td class="course-link" onclick="openPopover('61602')">計算機網路實驗</td>
+                <td>李春良</td>
+            </tr>
+            <tr>
+                <td>資工系</td>
+                <td class="course-link" onclick="openPopover('A2338')">作業系統實務</td>
+                <td>張哲維</td>
+            </tr>
+            <tr>
+                <td>資工系</td>
+                <td class="course-link" onclick="openPopover('58707')">生物統計</td>
+                <td>陳光武</td>
+            </tr>
+            <tr>
+                <td>資工系</td>
+                <td class="course-link" onclick="openPopover('A2339')">通訊系統</td>
+                <td>陳仁暉</td>
+            </tr>
+            <tr>
+                <td>資工系</td>
+                <td class="course-link" onclick="openPopover('56665')">軟硬體專題(2)</td>
+                <td>魏志達</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <button onclick="changeResult()">Change</button>
+
+    <div id="coursePopover">
+        <div class="popover-header">
+            <span style="font-weight: bold; color: #333;">長庚大學課程詳細資料</span>
+            <span class="close-btn" onclick="closePopover()">關閉</span>
+        </div>
+        <iframe id="courseFrame" src="" width="100%" height="93%" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        // 投影片 HW#2 要求的功能：修改第一筆老師名稱
+        function changeResult() {
+            var myTable = document.getElementById("csie");
+            // rows[1] 是資料的第一列，cells[2] 是「授課教師」欄位
+            myTable.rows[1].cells[2].innerHTML = "李春良";
+        }
+
+        // 開啟右側半頁視窗並載入對應的 sectionid
+        function openPopover(sectionId) {
+            var baseUrl = "https://catalog.cgu.edu.tw/coursedata?sectionid=";
+            document.getElementById("courseFrame").src = baseUrl + sectionId;
+            document.getElementById("coursePopover").style.display = "block";
+        }
+
+        // 關閉視窗
+        function closePopover() {
+            document.getElementById("coursePopover").style.display = "none";
+            document.getElementById("courseFrame").src = "";
+        }
+    </script>
+
+</body>
+</html>
