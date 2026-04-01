@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>ex4</title>
+</head>
+<body>
+    <h1>ex4</h1>
+    <p>按 <b>F12</b> 打開Console</p>
+
+    <script>
+    
+        function tree(n) {
+            console.clear();
+            printTreeTop(n);
+            printTreeBottom(n);
+        }
+
+    
+        function printTreeTop(n) {
+            for (let i = 1; i <= n; i++) {
+                let spaces = n - i;      
+                let stars = 2 * i - 1;  
+                
+             
+                console.log(repeatchar(spaces, ' ') + repeatchar(stars, '*'));
+            }
+        }
+
+
+        function printTreeBottom(n) {
+            for (let i = 0; i < 3; i++) {
+            
+                console.log(repeatchar(n - 1, ' ') + '*');
+            }
+        }
+
+      
+        function repeatchar(num, arg_char) {
+            let result = "";
+            for (let j = 0; j < num; j++) {
+                result += arg_char;
+            }
+            return result;
+        }
+
+       
+        tree(4);
+
+    </script>
+</body>
+</html>
